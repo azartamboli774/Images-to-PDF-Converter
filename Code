@@ -1,0 +1,17 @@
+import os
+from PIL import Image
+
+def images_to_pdf(folder_path):
+    images = []
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".jpg") or filename.endswith(".jpeg") or filename.endswith(".png"):
+            image = Image.open(os.path.join(folder_path, filename))
+            images.append(image)
+
+    if not images:
+        raise Exception("No images found in the folder")
+
+    images[0].save(os.path.join(folder_path, 'result.pdf'), save_all=True, append_images=images[1:])
+
+if __name__ == '__main__':
+    images_to_pdf('C:/Python/imagetopdf')
